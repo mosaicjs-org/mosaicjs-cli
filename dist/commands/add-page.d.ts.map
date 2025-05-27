@@ -1,0 +1,1 @@
+{"version":3,"file":"add-page.d.ts","sourceRoot":"","sources":["../../src/commands/add-page.ts"],"names":[],"mappings":"AAMA,UAAU,cAAc;IACtB,MAAM,CAAC,EAAE,MAAM,CAAC;IAChB,KAAK,CAAC,EAAE,MAAM,CAAC;CAChB;AAED,wBAAsB,OAAO,CAAC,QAAQ,EAAE,MAAM,EAAE,OAAO,GAAE,cAAmB,iBAmC3E"}
