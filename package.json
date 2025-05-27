@@ -1,6 +1,6 @@
 {
   "name": "@mosaicjs/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool for MosaicJS - Framework-agnostic SSR scaffolding",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
