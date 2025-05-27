@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import { createProject } from './commands/create';
 import { addPage } from './commands/add-page';
 import { addLayout } from './commands/add-layout';
+import { installMosaic } from './commands/install';
 
 const program = new Command();
 
@@ -12,6 +13,24 @@ program
   .name('mosaicjs')
   .description('CLI tool for MosaicJS - Framework-agnostic SSR for Nanoservice-ts')
   .version('1.0.0');
+
+// Install MosaicJS into existing project command
+program
+  .command('install')
+  .alias('init')
+  .description('Install MosaicJS into an existing Nanoservice-ts project')
+  .option('-f, --framework <framework>', 'Framework to use (react, vue, svelte)', 'react')
+  .option('-t, --template <template>', 'Template to use (basic, dashboard, blog)', 'basic')
+  .option('--skip-install', 'Skip npm install')
+  .option('--force', 'Force installation even if not a Nanoservice-ts project')
+  .action(async (options) => {
+    try {
+      await installMosaic(options);
+    } catch (error) {
+      console.error(chalk.red('Error installing MosaicJS:'), error);
+      process.exit(1);
+    }
+  });
 
 // Create new project command
 program
@@ -93,6 +112,7 @@ program
 program.on('--help', () => {
   console.log('');
   console.log(chalk.cyan.bold('Examples:'));
+  console.log('  $ mosaicjs install --framework react');
   console.log('  $ mosaicjs create my-app --framework react');
   console.log('  $ mosaicjs create my-vue-app --framework vue');
   console.log('  $ mosaicjs add:page Dashboard --layout DashboardLayout');

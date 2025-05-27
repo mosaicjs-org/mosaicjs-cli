@@ -1,0 +1,1 @@
+{"version":3,"file":"install.d.ts","sourceRoot":"","sources":["../../src/commands/install.ts"],"names":[],"mappings":"AAOA,UAAU,cAAc;IACtB,SAAS,EAAE,OAAO,GAAG,KAAK,GAAG,QAAQ,CAAC;IACtC,QAAQ,EAAE,OAAO,GAAG,WAAW,GAAG,MAAM,CAAC;IACzC,WAAW,CAAC,EAAE,OAAO,CAAC;IACtB,KAAK,CAAC,EAAE,OAAO,CAAC;CACjB;AAED,wBAAsB,aAAa,CAAC,OAAO,GAAE,cAA0D,iBA+ItG"}

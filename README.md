@@ -1,161 +1,162 @@
 # @mosaicjs/cli
 
-**Beautiful CLI for MosaicJS** - Scaffold framework-agnostic SSR applications with ease.
+CLI tool for MosaicJS - Framework-agnostic SSR for Nanoservice-ts
 
-## 🚀 Quick Start
-
-```bash
-# Create a new React project
-npx @mosaicjs/cli create my-app --framework react
-
-# Create a new Vue project  
-npx @mosaicjs/cli create my-vue-app --framework vue
-
-# Interactive mode
-npx @mosaicjs/cli create
-```
-
-## 📦 Installation
+## Installation
 
 ```bash
-# Global installation (recommended)
 npm install -g @mosaicjs/cli
-
-# Use directly with npx
-npx @mosaicjs/cli create my-app
 ```
 
-## 🛠️ Commands
+## Commands
 
-### `create` - Create New Project
+### Install MosaicJS into existing project
 
-Create a new MosaicJS project with your preferred framework.
+Install MosaicJS into an existing Nanoservice-ts project:
 
 ```bash
-mosaicjs create [project-name] [options]
+# Install with React (default)
+mosaicjs install
+
+# Install with specific framework and template
+mosaicjs install --framework react --template dashboard
+
+# Force installation even if not a Nanoservice-ts project
+mosaicjs install --force
 ```
 
-**Arguments:**
-- `project-name` - Name of the project (optional, will prompt if not provided)
-
 **Options:**
-- `-f, --framework <framework>` - Framework to use: `react`, `vue`, `svelte` (default: `react`)
-- `-t, --template <template>` - Template to use: `basic`, `dashboard`, `blog` (default: `basic`)
+- `-f, --framework <framework>` - Framework to use (react, vue, svelte) [default: react]
+- `-t, --template <template>` - Template to use (basic, dashboard, blog) [default: basic]
 - `--skip-install` - Skip npm install
+- `--force` - Force installation even if not a Nanoservice-ts project
 
-**Examples:**
+### Create new project
+
+Create a new MosaicJS project from scratch:
+
 ```bash
-# Interactive mode
-mosaicjs create
+# Create with prompts
+mosaicjs create my-app
 
-# React project with basic template
-mosaicjs create my-app --framework react
-
-# Vue project with dashboard template
-mosaicjs create my-dashboard --framework vue --template dashboard
-
-# Skip dependency installation
-mosaicjs create my-app --skip-install
+# Create with specific options
+mosaicjs create my-app --framework react --template dashboard
 ```
 
-### `add:page` - Add New Page
+### Add components
 
-Add a new page component to your existing project.
+Add new pages and layouts to your project:
 
 ```bash
-mosaicjs add:page <page-name> [options]
-```
-
-**Arguments:**
-- `page-name` - Name of the page component (e.g., `About`, `Dashboard`, `UserProfile`)
-
-**Options:**
-- `-l, --layout <layout>` - Layout component to use for this page
-- `-r, --route <route>` - Custom route path (defaults to kebab-case of page name)
-
-**Examples:**
-```bash
-# Basic page
-mosaicjs add:page About
-
-# Page with custom route
-mosaicjs add:page UserProfile --route /users/profile
-
-# Page with layout
+# Add a new page
 mosaicjs add:page Dashboard --layout DashboardLayout
-```
 
-### `add:layout` - Add New Layout
-
-Add a new layout component to your project.
-
-```bash
-mosaicjs add:layout <layout-name>
-```
-
-**Arguments:**
-- `layout-name` - Name of the layout component (e.g., `Dashboard`, `Auth`, `Blog`)
-
-**Examples:**
-```bash
-# Basic layout
-mosaicjs add:layout DashboardLayout
-
-# Auth layout
+# Add a new layout
 mosaicjs add:layout AuthLayout
 ```
 
-### `info` - Project Information
+## What gets installed
 
-Display information about MosaicJS and supported frameworks.
+When you run `mosaicjs install`, the CLI will:
+
+1. **Update package.json** with MosaicJS dependencies
+2. **Create directory structure**:
+   ```
+   src/
+   ├── client/
+   │   ├── components/
+   │   ├── layouts/
+   │   ├── pages/
+   │   └── styles/
+   ├── nodes/
+   │   └── mosaic/
+   └── workflows/
+       └── json/
+   ```
+
+3. **Generate framework files**:
+   - Client entry point (`src/client/entry-client.tsx`)
+   - App component (`src/client/App.tsx`)
+   - Sample pages (Home, About, Dashboard)
+   - Layouts (Default, Dashboard)
+   - Components (Link)
+
+4. **Create MosaicJS node** (`src/nodes/mosaic/MosaicNode.ts`)
+5. **Generate workflows** for each page
+6. **Setup build configuration**:
+   - Vite config
+   - TypeScript config
+   - Tailwind CSS
+   - PostCSS
+
+## Templates
+
+### Basic Template
+- Simple home and about pages
+- Default layout with navigation
+- Clean, minimal design
+
+### Dashboard Template
+- Admin dashboard with stats
+- Sidebar navigation
+- Dashboard-specific layout
+- Sample data visualization
+
+### Blog Template (Coming Soon)
+- Blog listing and post pages
+- Blog-specific layouts
+- Content management features
+
+## Framework Support
+
+- ✅ **React** - Full support with TypeScript
+- 🚧 **Vue** - Coming soon
+- 🚧 **Svelte** - Coming soon
+
+## Requirements
+
+- Node.js 18+
+- Existing Nanoservice-ts project (for install command)
+- NPM or Yarn
+
+## Examples
+
+### Install into existing Nanoservice-ts project
 
 ```bash
-mosaicjs info
+cd my-nanoservice-project
+mosaicjs install --framework react --template dashboard
+npm run dev
 ```
 
-## 🎨 Framework Support
+### Create new project
 
-### React 18+
-- Full SSR support with React 18
-- TypeScript out of the box
-- Vite for fast development
-- Modern React patterns (hooks, suspense, etc.)
-
-### Vue 3+
-- Vue 3 Composition API
-- TypeScript support
-- Vite integration
-- SSR with `@vue/server-renderer`
-
-### Svelte (Coming Soon)
-- SvelteKit-style development
-- TypeScript support
-- Vite integration
-
-## 📁 Generated Project Structure
-
-```
-my-app/
-├── src/
-│   ├── client/           # Frontend code
-│   │   ├── pages/        # Page components
-│   │   ├── layouts/      # Layout components
-│   │   ├── App.tsx       # Main app component
-│   │   ├── entry-client.tsx  # Client entry point
-│   │   └── entry-server.tsx  # Server entry point
-│   └── nodes/            # Backend nodes
-│       └── mosaic.ts     # MosaicJS node
-├── workflows/            # Workflow definitions
-│   └── json/
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
+```bash
+mosaicjs create my-new-app --framework react
+cd my-new-app
+npm run dev
 ```
 
-## 📄 License
+## Development Scripts
 
-MIT License - see [LICENSE](../../LICENSE) for details.
+After installation, your package.json will include:
+
+```json
+{
+  "scripts": {
+    "dev": "npm run dev:server & npm run dev:client",
+    "dev:server": "ts-node src/index.ts",
+    "dev:client": "vite",
+    "build": "npm run build:server && npm run build:client",
+    "build:server": "tsc",
+    "build:client": "vite build"
+  }
+}
+```
+
+## License
+
+MIT
 
 ---
 

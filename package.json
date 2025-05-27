@@ -5,8 +5,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
-    "mosaic": "./dist/cli.js",
-    "mosaicjs": "./dist/cli.js"
+    "mosaic": "dist/cli.js",
+    "mosaicjs": "dist/cli.js"
   },
   "keywords": [
     "nanoservice",
@@ -23,7 +23,7 @@
   "homepage": "https://mosaicjs.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deskree-inc/mosaicjs",
+    "url": "git+https://github.com/deskree-inc/mosaicjs.git",
     "directory": "packages/cli"
   },
   "license": "MIT",
@@ -57,5 +57,9 @@
   ],
   "engines": {
     "node": ">=18.0.0"
+  },
+  "author": "Wellington Prado",
+  "bugs": {
+    "url": "https://github.com/deskree-inc/mosaicjs/issues"
   }
-} 
+}
