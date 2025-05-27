@@ -280,7 +280,7 @@ export default class MosaicNode extends NanoService<MosaicNodeInputs> {
 </body>
 </html>\`;
         
-        ctx.response.setHeader('Content-Type', 'text/html');
+        ctx.response.setHeader('Content-Type', 'text/html; charset=UTF-8');
         response.setSuccess(html);
       }
 
@@ -822,13 +822,15 @@ async function createWorkflows(projectPath, options) {
         trigger: {
             http: {
                 method: "GET",
-                path: "/"
+                path: "/",
+                accept: "text/html"
             }
         },
         steps: [
             {
                 name: "render",
-                node: "mosaic-render"
+                node: "mosaic-render",
+                type: "module"
             }
         ],
         nodes: {
@@ -849,13 +851,15 @@ async function createWorkflows(projectPath, options) {
         trigger: {
             http: {
                 method: "GET",
-                path: "/about"
+                path: "/about",
+                accept: "text/html"
             }
         },
         steps: [
             {
                 name: "render",
-                node: "mosaic-render"
+                node: "mosaic-render",
+                type: "module"
             }
         ],
         nodes: {
@@ -874,17 +878,20 @@ async function createWorkflows(projectPath, options) {
             trigger: {
                 http: {
                     method: "GET",
-                    path: "/dashboard"
+                    path: "/dashboard",
+                    accept: "text/html"
                 }
             },
             steps: [
                 {
                     name: "fetch-data",
-                    node: "fetch-dashboard-data"
+                    node: "fetch-dashboard-data",
+                    type: "module"
                 },
                 {
                     name: "render",
-                    node: "mosaic-render"
+                    node: "mosaic-render",
+                    type: "module"
                 }
             ],
             nodes: {
