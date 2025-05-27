@@ -16,13 +16,13 @@ Install MosaicJS into an existing Nanoservice-ts project:
 
 ```bash
 # Install with React (default)
-mosaicjs install
+npx @mosaicjs/cli install
 
 # Install with specific framework and template
-mosaicjs install --framework react --template dashboard
+npx @mosaicjs/cli install --framework react --template dashboard
 
 # Force installation even if not a Nanoservice-ts project
-mosaicjs install --force
+npx @mosaicjs/cli install --force
 ```
 
 **Options:**
@@ -37,10 +37,10 @@ Create a new MosaicJS project from scratch:
 
 ```bash
 # Create with prompts
-mosaicjs create my-app
+npx @mosaicjs/cli create my-app
 
 # Create with specific options
-mosaicjs create my-app --framework react --template dashboard
+npx @mosaicjs/cli create my-app --framework react --template dashboard
 ```
 
 ### Add components
@@ -49,10 +49,10 @@ Add new pages and layouts to your project:
 
 ```bash
 # Add a new page
-mosaicjs add:page Dashboard --layout DashboardLayout
+npx @mosaicjs/cli add:page Dashboard --layout DashboardLayout
 
 # Add a new layout
-mosaicjs add:layout AuthLayout
+npx @mosaicjs/cli add:layout AuthLayout
 ```
 
 ## What gets installed
@@ -125,14 +125,14 @@ When you run `mosaicjs install`, the CLI will:
 
 ```bash
 cd my-nanoservice-project
-mosaicjs install --framework react --template dashboard
+npx @mosaicjs/cli install --framework react --template dashboard
 npm run dev
 ```
 
 ### Create new project
 
 ```bash
-mosaicjs create my-new-app --framework react
+npx @mosaicjs/cli create my-new-app --framework react
 cd my-new-app
 npm run dev
 ```

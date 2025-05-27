@@ -147,9 +147,9 @@ export async function installMosaic(options: InstallOptions = { framework: 'reac
     console.log('2. Open your browser to:');
     console.log(chalk.gray('   http://localhost:4000\n'));
     console.log('3. Add new pages:');
-    console.log(chalk.gray('   npx mosaicjs add:page MyPage\n'));
+    console.log(chalk.gray('   npx @mosaicjs/cli add:page MyPage\n'));
     console.log('4. Add new layouts:');
-    console.log(chalk.gray('   npx mosaicjs add:layout MyLayout\n'));
+    console.log(chalk.gray('   npx @mosaicjs/cli add:layout MyLayout\n'));
     
   } catch (error) {
     console.error(chalk.red('❌ Installation failed:'), error);
@@ -188,6 +188,9 @@ async function updatePackageJson(projectPath: string, options: InstallOptions) {
   packageJson.devDependencies.tailwindcss = packageJson.devDependencies.tailwindcss || '^3.3.0';
   packageJson.devDependencies.autoprefixer = packageJson.devDependencies.autoprefixer || '^10.4.0';
   packageJson.devDependencies.postcss = packageJson.devDependencies.postcss || '^8.4.0';
+  
+  // Set module type for ES modules
+  packageJson.type = 'module';
   
   // Add/update scripts
   packageJson.scripts = packageJson.scripts || {};
@@ -275,7 +278,7 @@ export default class MosaicNode extends NanoService<MosaicNodeInputs> {
           }
         };
         
-        ctx.response.headers['Content-Type'] = 'application/json';
+        ctx.response.setHeader('Content-Type', 'application/json');
         response.setSuccess(data);
       } else {
         // Return HTML for initial page load
@@ -307,7 +310,7 @@ export default class MosaicNode extends NanoService<MosaicNodeInputs> {
 </body>
 </html>\`;
         
-        ctx.response.headers['Content-Type'] = 'text/html';
+        ctx.response.setHeader('Content-Type', 'text/html');
         response.setSuccess(html);
       }
 

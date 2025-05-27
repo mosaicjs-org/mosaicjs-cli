@@ -109,11 +109,11 @@ program
 program.on('--help', () => {
     console.log('');
     console.log(chalk_1.default.cyan.bold('Examples:'));
-    console.log('  $ mosaicjs install --framework react');
-    console.log('  $ mosaicjs create my-app --framework react');
-    console.log('  $ mosaicjs create my-vue-app --framework vue');
-    console.log('  $ mosaicjs add:page Dashboard --layout DashboardLayout');
-    console.log('  $ mosaicjs add:layout AuthLayout');
+    console.log('  $ npx @mosaicjs/cli install --framework react');
+    console.log('  $ npx @mosaicjs/cli create my-app --framework react');
+    console.log('  $ npx @mosaicjs/cli create my-vue-app --framework vue');
+    console.log('  $ npx @mosaicjs/cli add:page Dashboard --layout DashboardLayout');
+    console.log('  $ npx @mosaicjs/cli add:layout AuthLayout');
     console.log('');
     console.log(chalk_1.default.yellow('For more information, visit https://mosaicjs.dev'));
 });
