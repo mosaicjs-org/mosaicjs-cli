@@ -263,7 +263,8 @@ export default class MosaicNode extends NanoService<MosaicNodeInputs> {
 
     try {
       // Check if this is a MosaicJS navigation request
-      const isMosaicRequest = ctx.request.headers['x-mosaic-request'] === 'true';
+      const isMosaicRequest = ctx.request.headers['x-mosaic-request'] === 'true' || 
+                             ctx.request.headers['X-Mosaic-Request'] === 'true';
       
       if (isMosaicRequest) {
         // Return JSON for client-side navigation
@@ -310,7 +311,8 @@ export default class MosaicNode extends NanoService<MosaicNodeInputs> {
 </html>\`;
         
         ctx.response.setHeader('Content-Type', 'text/html; charset=UTF-8');
-        response.setSuccess(html);
+        ctx.response.body = html;
+        response.setSuccess(null);
       }
 
     } catch (error: any) {
@@ -906,6 +908,37 @@ async function createWorkflows(projectPath: string, options: InstallOptions) {
 
   await fs.writeJson(path.join(projectPath, 'workflows/json/home.json'), homeWorkflow, { spaces: 2 });
 
+  // Home page workflow for /home path (alternative route)
+  const homeAltWorkflow = {
+    name: "home-alt",
+    trigger: {
+      http: {
+        method: "GET",
+        path: "/home",
+        accept: "text/html"
+      }
+    },
+    steps: [
+      {
+        name: "render",
+        node: "mosaic-render",
+        type: "module"
+      }
+    ],
+    nodes: {
+      render: {
+        inputs: {
+          component: "Home",
+          props: {
+            message: "Welcome to your new MosaicJS application!"
+          }
+        }
+      }
+    }
+  };
+
+  await fs.writeJson(path.join(projectPath, 'workflows/json/home-alt.json'), homeAltWorkflow, { spaces: 2 });
+
   // About page workflow
   const aboutWorkflow = {
     name: "about",
@@ -941,7 +974,7 @@ async function createWorkflows(projectPath: string, options: InstallOptions) {
       trigger: {
         http: {
           method: "GET",
-          path: "/",
+          path: "/dashboard",
           accept: "text/html"
         }
       },
